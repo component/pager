@@ -9,6 +9,10 @@
 
     $ component install component/pager
 
+## Events
+
+  - `select` (n) emitted when a page is selected
+
 ## API
 
 ### Pager#total(n)
