@@ -1,0 +1,13 @@
+
+.pager {
+  margin: 0;
+  padding: 0;
+}
+
+.pager li {
+  display: inline-block;
+}
+
+.pager-hide {
+  opacity: .2;
+}

@@ -1,0 +1,1 @@
+module.exports = '<ul class="pager">\n  <li class="prev"><a href="#">prev</a></li>\n  <li class="next"><a href="#">next</a></li>\n</ul>';
