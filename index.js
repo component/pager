@@ -76,7 +76,7 @@ Pager.prototype.prev = function(){
  */
 
 Pager.prototype.next = function(){
-  this.show(Math.min(this.pages(), this.current + 1));
+  this.show(Math.min(this.pages() - 1, this.current + 1));
 };
 
 /**
@@ -151,11 +151,11 @@ Pager.prototype.render = function(){
   o(links).insertAfter(prev);
 
   // prev
-  if (curr > 1) prev.removeClass('pager-hide')
+  if (curr) prev.removeClass('pager-hide')
   else prev.addClass('pager-hide');
 
   // next
-  if (curr < pages) next.removeClass('pager-hide')
+  if (curr < pages - 1) next.removeClass('pager-hide')
   else next.addClass('pager-hide');
 };
 
