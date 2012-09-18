@@ -26,7 +26,7 @@
       var pager = new Pager;
       pager.el.appendTo('body');
       pager.total(50).perpage(10).render();
-      pager.on('select', function(n){
+      pager.on('show', function(n){
         console.log('selected page %d', n);
       });
     </script>

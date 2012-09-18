@@ -25,7 +25,7 @@ function Pager() {
   this.el.on('click', 'li > a', this.onclick.bind(this));
   this.perpage(5);
   this.total(0);
-  this.show(1);
+  this.show(0);
 }
 
 /**
@@ -45,7 +45,7 @@ Pager.prototype.onclick = function(e){
   var el = o(e.target).parent();
   if (el.hasClass('prev')) return this.prev();
   if (el.hasClass('next')) return this.next();
-  this.show(parseInt(el.text(), 10));
+  this.show(el.text() - 1);
 };
 
 /**
@@ -142,7 +142,7 @@ Pager.prototype.render = function(){
   // page links
   for (var i = 0; i < pages; ++i) {
     var n = i + 1;
-    links += curr == n
+    links += curr == i
       ? '<li class="page active"><a href="#">' + n + '</a></li>'
       : '<li class="page"><a href="#">' + n + '</a></li>';
   }

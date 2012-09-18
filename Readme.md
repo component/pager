@@ -11,7 +11,7 @@
 
 ## Events
 
-  - `show` (n) emitted when a page is selected
+  - `show` (n) emitted when a page is selected (0-based)
 
 ## API
 
