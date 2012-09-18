@@ -80,7 +80,7 @@ Pager.prototype.next = function(){
 };
 
 /**
- * Select the `n`th page.
+ * Select the page `n`.
  *
  * @param {Number} n
  * @return {Pager}
@@ -88,9 +88,22 @@ Pager.prototype.next = function(){
  */
 
 Pager.prototype.show = function(n){
+  this.select(n);
+  this.emit('show', n)
+  return this;
+};
+
+/**
+ * Select page `n` without emitting "show".
+ *
+ * @param {Number} n
+ * @return {Pager}
+ * @api public
+ */
+
+Pager.prototype.select = function(n){
   this.current = n;
   this.render();
-  this.emit('show', n)
   return this;
 };
 

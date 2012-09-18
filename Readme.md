@@ -29,7 +29,11 @@
 
 ### Pager#show(n)
 
-  Select the `n`th page and `.render()`.
+  Select page `n`, `.render()`, and emit "show".
+
+### Pager#select(n)
+
+  Select page `n` and `.render()`.
 
 ### Pager#render()
 
