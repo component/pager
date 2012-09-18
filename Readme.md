@@ -11,7 +11,7 @@
 
 ## Events
 
-  - `select` (n) emitted when a page is selected
+  - `show` (n) emitted when a page is selected
 
 ## API
 
@@ -27,7 +27,7 @@
 
   Return the total number of pages.
 
-### Pager#select(n)
+### Pager#show(n)
 
   Select the `n`th page and `.render()`.
 

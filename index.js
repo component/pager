@@ -25,7 +25,7 @@ function Pager() {
   this.el.on('click', 'li > a', this.onclick.bind(this));
   this.perpage(5);
   this.total(0);
-  this.select(1);
+  this.show(1);
 }
 
 /**
@@ -45,7 +45,7 @@ Pager.prototype.onclick = function(e){
   var el = o(e.target).parent();
   if (el.hasClass('prev')) return this.prev();
   if (el.hasClass('next')) return this.next();
-  this.select(parseInt(el.text(), 10));
+  this.show(parseInt(el.text(), 10));
 };
 
 /**
@@ -66,7 +66,7 @@ Pager.prototype.pages = function(){
  */
 
 Pager.prototype.prev = function(){
-  this.select(Math.max(0, this.current - 1));
+  this.show(Math.max(0, this.current - 1));
 };
 
 /**
@@ -76,7 +76,7 @@ Pager.prototype.prev = function(){
  */
 
 Pager.prototype.next = function(){
-  this.select(Math.min(this.pages(), this.current + 1));
+  this.show(Math.min(this.pages(), this.current + 1));
 };
 
 /**
@@ -87,10 +87,10 @@ Pager.prototype.next = function(){
  * @api public
  */
 
-Pager.prototype.select = function(n){
+Pager.prototype.show = function(n){
   this.current = n;
   this.render();
-  this.emit('select', n)
+  this.emit('show', n)
   return this;
 };
 
