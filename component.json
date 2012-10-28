@@ -3,7 +3,12 @@
   "repo": "component/pager",
   "description": "Pager ui component",
   "version": "0.0.3",
-  "keywords": ["pager", "ui", "paginate", "pagination"],
+  "keywords": [
+    "pager",
+    "ui",
+    "paginate",
+    "pagination"
+  ],
   "dependencies": {
     "component/emitter": "*",
     "component/jquery": "*"
@@ -15,5 +20,6 @@
   ],
   "styles": [
     "pager.css"
-  ]
+  ],
+  "license": "MIT"
 }
