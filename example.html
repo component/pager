@@ -23,12 +23,20 @@
 
     <script>
       var Pager = require('pager');
-      var pager = new Pager;
+
+      var pager
+
+      pager = new Pager;
       pager.el.appendTo('body');
-      pager.total(50).perpage(10).render();
-      pager.on('show', function(n){
-        console.log('selected page %d', n);
-      });
+      pager.total(30).perpage(10).render();
+
+      pager = new Pager;
+      pager.el.appendTo('body');
+      pager.total(70).perpage(10).render();
+
+      pager = new Pager;
+      pager.el.appendTo('body');
+      pager.total(500).perpage(10).render();
     </script>
   </body>
 </html>
