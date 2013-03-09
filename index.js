@@ -134,6 +134,20 @@ Pager.prototype.total = function(n){
 };
 
 /**
+ * Create a page link for index `i`.
+ *
+ * @param {Number} i
+ * @api private
+ */
+
+Pager.prototype.createPageLink = function(i){
+  var n = i + 1;
+  return this.current == i
+    ? '<li class="pager-page pager-active"><a href="#">' + n + '</a></li>'
+    : '<li class="pager-page"><a href="#">' + n + '</a></li>';
+};
+
+/**
  * Render the pager.
  *
  * @api public
@@ -150,14 +164,63 @@ Pager.prototype.render = function(){
   var links = '';
 
   // remove old
-  el.find('li.page').remove();
+  el.find('li.pager-page').remove();
+  el.find('span.pager-dots').remove();
 
   // page links
-  for (var i = 0; i < pages; ++i) {
-    var n = i + 1;
-    links += curr == i
-      ? '<li class="page active"><a href="#">' + n + '</a></li>'
-      : '<li class="page"><a href="#">' + n + '</a></li>';
+  if (pages > 7) {
+    // when there are more than 7 pages
+
+    // the ugly code following determines
+    // which links should be shown
+    // where and when to put the dots
+
+    var needle = curr;
+    links += this.createPageLink(0);
+    if (needle > 3) {
+      if (needle < pages-4) {
+        links += '<span class="pager-dots">...</span>';
+      }
+      else if (needle >= pages-4) {
+        needle = pages-3;
+        links += '<span class="pager-dots">...</span>';
+        links += this.createPageLink(needle-2);
+      }
+    }
+    else {
+      needle = 2;
+    }
+
+    links += this.createPageLink(needle-1);
+    if (needle != 0 && needle != pages-1) links += this.createPageLink(needle);
+
+    if (needle >= 2) {
+      links += this.createPageLink(needle+1);
+    }
+    else if (curr > pages-3) {
+      //
+    }
+    else {
+      links += '<span class="pager-dots">...</span>';
+      links += this.createPageLink(Math.floor(pages/2));
+      links += '<span class="pager-dots">...</span>';
+    }
+
+    if (curr <= 3) {
+      links += this.createPageLink(needle+2);
+    }
+
+    if (needle+1 < pages-3) {
+      links += '<span class="pager-dots">...</span>';
+    }
+
+    links += this.createPageLink(pages-1);
+  }
+  else {
+    // in series
+    for (var i = 0; i < pages; ++i) {
+      links += this.createPageLink(i);
+    }
   }
 
   // insert
