@@ -5,7 +5,7 @@
 
 var Emitter = require('emitter')
   , html = require('./template')
-  , o = require('jquery');
+  , dom = require('dom');
 
 /**
  * Expose `Pager`.
@@ -21,7 +21,7 @@ module.exports = Pager;
 
 function Pager() {
   Emitter.call(this);
-  this.el = o(html);
+  this.el = dom(html);
   this.el.on('click', 'li > a', this.onclick.bind(this));
   this.perpage(5);
   this.total(0);
@@ -42,7 +42,7 @@ Emitter(Pager.prototype);
 
 Pager.prototype.onclick = function(e){
   e.preventDefault();
-  var el = o(e.target).parent();
+  var el = dom(e.target.parentNode);
   if (el.hasClass('prev')) return this.prev();
   if (el.hasClass('next')) return this.next();
   this.show(el.text() - 1);
@@ -147,7 +147,7 @@ Pager.prototype.render = function(){
   var el = this.el;
   var prev = el.find('.prev');
   var next = el.find('.next');
-  var links = '';
+  var links = [];
 
   // remove old
   el.find('li.page').remove();
@@ -155,13 +155,18 @@ Pager.prototype.render = function(){
   // page links
   for (var i = 0; i < pages; ++i) {
     var n = i + 1;
-    links += curr == i
-      ? '<li class="page active"><a href="#">' + n + '</a></li>'
-      : '<li class="page"><a href="#">' + n + '</a></li>';
+    curr == i
+      ? links.push('<li class="page active"><a href="#">' + n + '</a></li>')
+      : links.push('<li class="page"><a href="#">' + n + '</a></li>');
   }
 
-  // insert
-  o(links).insertAfter(prev);
+  // insert after '.prev' && before '.next'
+  for(var i = 0; i < links.length; ++i) {
+    el.get().insertBefore(
+        dom(links[i]).get()
+      , next.get()
+    );
+  }
 
   // prev
   if (curr) prev.removeClass('pager-hide')
