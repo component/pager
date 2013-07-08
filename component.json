@@ -2,11 +2,11 @@
   "name": "pager",
   "repo": "component/pager",
   "description": "Pager ui component",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "keywords": ["pager", "ui", "paginate", "pagination"],
   "dependencies": {
-    "component/emitter": "*",
-    "component/dom": "*"
+    "component/emitter": "1.0.1",
+    "component/dom": "0.8.0"
   },
   "development": {},
   "scripts": [

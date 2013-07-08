@@ -1,11 +1,11 @@
 {
   "name": "pager-component",
   "description": "Pager ui component",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "keywords": ["pager", "ui", "paginate", "pagination"],
   "dependencies": {
     "emitter-component": "*",
-    "jquery-component": "*"
+    "dom-component": "*"
   },
   "component": {
     "scripts": {
