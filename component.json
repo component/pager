@@ -6,7 +6,7 @@
   "keywords": ["pager", "ui", "paginate", "pagination"],
   "dependencies": {
     "component/emitter": "*",
-    "component/jquery": "*"
+    "component/dom": "*"
   },
   "development": {},
   "scripts": [

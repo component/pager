@@ -5,7 +5,7 @@
 
 var Emitter = require('emitter')
   , html = require('./template')
-  , o = require('jquery');
+  , dom = require('dom');
 
 /**
  * Expose `Pager`.
@@ -21,7 +21,7 @@ module.exports = Pager;
 
 function Pager() {
   Emitter.call(this);
-  this.el = o(html);
+  this.el = dom(html);
   this.el.on('click', 'li > a', this.onclick.bind(this));
   this.perpage(5);
   this.total(0);
@@ -42,7 +42,7 @@ Emitter(Pager.prototype);
 
 Pager.prototype.onclick = function(e){
   e.preventDefault();
-  var el = o(e.target).parent();
+  var el = dom(e.target.parentNode);
   if (el.hasClass('prev')) return this.prev();
   if (el.hasClass('next')) return this.next();
   this.show(el.text() - 1);
@@ -161,7 +161,7 @@ Pager.prototype.render = function(){
   }
 
   // insert
-  o(links).insertAfter(prev);
+  if (links) dom(links).insertAfter(prev);
 
   // prev
   if (curr) prev.removeClass('pager-hide')
