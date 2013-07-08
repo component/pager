@@ -147,7 +147,7 @@ Pager.prototype.render = function(){
   var el = this.el;
   var prev = el.find('.prev');
   var next = el.find('.next');
-  var links = [];
+  var links = '';
 
   // remove old
   el.find('li.page').remove();
@@ -155,18 +155,13 @@ Pager.prototype.render = function(){
   // page links
   for (var i = 0; i < pages; ++i) {
     var n = i + 1;
-    curr == i
-      ? links.push('<li class="page active"><a href="#">' + n + '</a></li>')
-      : links.push('<li class="page"><a href="#">' + n + '</a></li>');
+    links += curr == i
+      ? '<li class="page active"><a href="#">' + n + '</a></li>'
+      : '<li class="page"><a href="#">' + n + '</a></li>';
   }
 
-  // insert after '.prev' && before '.next'
-  for(var i = 0; i < links.length; ++i) {
-    el.get().insertBefore(
-        dom(links[i]).get()
-      , next.get()
-    );
-  }
+  // insert
+  if (links) dom(links).insertAfter(prev);
 
   // prev
   if (curr) prev.removeClass('pager-hide')
