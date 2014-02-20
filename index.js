@@ -142,6 +142,7 @@ Pager.prototype.total = function(n){
 Pager.prototype.render = function(){
   var total = this._total;
   var curr = this.current;
+  var max_pages = this.max_pages;
   var per = this._perpage;
   var pages = this.pages();
   var el = this.el;
