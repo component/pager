@@ -45,6 +45,8 @@ Pager.prototype.onclick = function(e){
   var el = dom(e.target.parentNode);
   if (el.hasClass('prev')) return this.prev();
   if (el.hasClass('next')) return this.next();
+  if (el.hasClass('first')) return this.first();
+  if (el.hasClass('last')) return this.last();
   this.show(el.text() - 1);
 };
 
@@ -77,6 +79,14 @@ Pager.prototype.prev = function(){
 
 Pager.prototype.next = function(){
   this.show(Math.min(this.pages() - 1, this.current + 1));
+};
+
+Pager.prototype.first = function(){
+  this.show(0);
+};
+
+Pager.prototype.last = function(){
+  this.show(this.pages()-1);
 };
 
 /**
@@ -134,6 +144,20 @@ Pager.prototype.total = function(n){
 };
 
 /**
+ * Set the max number of pages displayed by pager
+ * at once
+ *
+ * @param {Number} n
+ * @return {Pager}
+ * @api public
+ */
+
+Pager.prototype.max_pages = function(n){
+  this._max_pages = n;
+  return this;
+};
+
+/**
  * Render the pager.
  *
  * @api public
@@ -142,7 +166,7 @@ Pager.prototype.total = function(n){
 Pager.prototype.render = function(){
   var total = this._total;
   var curr = this.current;
-  var max_pages = this.max_pages;
+  var max_pages = this._max_pages;
   var per = this._perpage;
   var pages = this.pages();
   var el = this.el;
@@ -154,11 +178,41 @@ Pager.prototype.render = function(){
   el.find('li.page').remove();
 
   // page links
-  for (var i = 0; i < pages; ++i) {
-    var n = i + 1;
-    links += curr == i
-      ? '<li class="page active"><a href="#">' + n + '</a></li>'
-      : '<li class="page"><a href="#">' + n + '</a></li>';
+  if(pages <= max_pages) {
+    for (var i = 0; i < pages; ++i) {
+        var n = i + 1;
+        links += curr == i
+          ? '<li class="page active"><a href="#">' + n + '</a></li>'
+          : '<li class="page"><a href="#">' + n + '</a></li>';
+      }
+  } else {
+
+    top_delta = Math.floor(max_pages / 2);
+    bottom_delta = Math.floor(max_pages / 2);
+    start_page = curr - bottom_delta;
+
+    if(start_page < 0) {
+      start_page = 0;
+    } else {
+      if(start_page > 0) {
+        links += '<li class="page"><a href="#">1</a></li>';
+        links += '<li class="page">...</li>'
+      }
+    }
+
+    end_page = curr + top_delta;
+    if(end_page > pages-1) end_page = pages-1;
+
+    for (var i = start_page; i <= end_page; ++i) {
+        var n = i + 1;
+        links += curr == i
+          ? '<li class="page active"><a href="#">' + n + '</a></li>'
+          : '<li class="page"><a href="#">' + n + '</a></li>';
+      }
+    if(end_page < pages - 1) {
+      links += '<li class="page">...</li>'
+      links += '<li class="page"><a href="#">' + pages + '</a></li>';
+    }
   }
 
   // insert
