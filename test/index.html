@@ -38,7 +38,7 @@
       var Pager = require('pager');
 
       pgr = new Pager();
-      pgr.total(1000).perpage(10).max_pages(5).render();
+      pgr.total(1000).perpage(10).max_pages(2).render();
 
       pgr.el.appendTo("#pager");
       pgr.on('show', function(position){
