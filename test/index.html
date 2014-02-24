@@ -9,55 +9,26 @@
     <style>
       body {
         padding: 50px;
+        font: 16px Helvetica, Arial;
       }
-      input {
-        font: 12px Helvetica, Arial;
-      }
-      .pillbox {
-        width: 200px;
-        border: 1px solid #eee;
-        border-top-color: #ddd;
+
+      li.page, .next, .last, .prev, .first {
+        margin: 5px;
         padding: 5px;
-        border-radius: 2px;
+        background-color: #eee;
       }
-      .pillbox input {
-        padding: 5px;
-        width: 30%;
-        float: left;
-      }
-      .pillbox span {
-        display: block;
-        float: left;
-        margin: 2px;
-        font: 12px Helvetica, Arial;
-        border: 1px solid #eee;
-        border-radius: 2px;
-        padding: 5px 8px;
-      }
-      .pillbox span:hover {
-        box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
-        background: #fafafa;
-      }
-      .pillbox span a {
-        display: inline-block;
-        font-size: 6px;
-        color: #888;
-        border: 1px solid #eee;
-        width: 10px;
-        height: 10px;
-        line-height: 10px;
-        text-align: center;
-        border-radius: 10px;
+
+      a {
         text-decoration: none;
-        margin-left: 5px;
-        position: relative;
-        top: -1px;
+        color: black;
       }
-      .pillbox span a:hover {
-        background: #eee;
+
+      li.page.active {
+        background-color: blue;
       }
-      .pillbox span a:active {
-        background: #ddd;
+
+      li.page.active a {
+        color: white;
       }
     </style>
 
@@ -67,9 +38,12 @@
       var Pager = require('pager');
 
       pgr = new Pager();
-      pgr.total(100).perpage(10).render();
+      pgr.total(100).perpage(10).max_pages(3).render();
 
       pgr.el.appendTo("#pager");
+      pgr.on('show', function(position){
+        console.log('Page position selected: ' + position);
+      });
     </script>
   </body>
 </html>
