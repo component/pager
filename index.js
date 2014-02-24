@@ -177,8 +177,8 @@ Pager.prototype.render = function(){
   // remove old
   el.find('li.page').remove();
 
-  // page links
-  if(pages <= max_pages) {
+  // Ignore all the advanced logic when pages count fits the window
+  if(pages <= max_pages * 2) {
     for (var i = 0; i < pages; ++i) {
         var n = i + 1;
         links += curr == i
@@ -187,21 +187,44 @@ Pager.prototype.render = function(){
       }
   } else {
 
-    top_delta = Math.floor(max_pages / 2);
-    bottom_delta = Math.floor(max_pages / 2);
-    start_page = curr - bottom_delta;
+    // start_page: window start position
+    // end_page: window end position
+    //
+    // max_pages: pages window size to left and right from the current page
+    // full window length is essentially max_pages * 2 + 1
+    //
+    // start_delta: extra pages to extend the end of window when current page is
+    // too close to 0
+    //
+    // end_delta: extra pages to extend the start of window when current page is
+    // too close to an end
+    //
+    // Rendering ... spaces only when difference between start window and 1 as well
+    // as end window and pages count is greater than 1
+
+    start_page = curr - max_pages;
+    start_delta = 0;
+    end_delta = 0;
 
     if(start_page < 0) {
       start_page = 0;
+      start_delta = Math.abs(curr - max_pages)
     } else {
       if(start_page > 0) {
         links += '<li class="page"><a href="#">1</a></li>';
-        links += '<li class="page">...</li>'
+        if(start_page > 1) links += '<li class="page">...</li>';
       }
     }
 
-    end_page = curr + top_delta;
-    if(end_page > pages-1) end_page = pages-1;
+    end_page = curr + max_pages + 1;
+
+    if(end_page > pages) {
+      end_page = pages;
+      end_delta = curr + max_pages - pages;
+    }
+
+    start_page -= end_delta;
+    end_page += start_delta - 1;
 
     for (var i = start_page; i <= end_page; ++i) {
         var n = i + 1;
@@ -209,8 +232,9 @@ Pager.prototype.render = function(){
           ? '<li class="page active"><a href="#">' + n + '</a></li>'
           : '<li class="page"><a href="#">' + n + '</a></li>';
       }
+
     if(end_page < pages - 1) {
-      links += '<li class="page">...</li>'
+      if(end_page < pages - 2) links += '<li class="page">...</li>';
       links += '<li class="page"><a href="#">' + pages + '</a></li>';
     }
   }
