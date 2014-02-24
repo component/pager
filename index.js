@@ -178,7 +178,8 @@ Pager.prototype.render = function(){
   el.find('li.page').remove();
 
   // Ignore all the advanced logic when pages count fits the window
-  if(pages <= max_pages * 2) {
+  // or when max_pages is undefined
+  if(!max_pages || max_pages == 0 || pages <= max_pages * 2) {
     for (var i = 0; i < pages; ++i) {
         var n = i + 1;
         links += curr == i
