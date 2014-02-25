@@ -2,7 +2,7 @@
 
   Pager ui component.
 
-  ![](https://github.com/redbadger/pager/blob/master/pager_demo.gif)
+  ![Pager component demo](https://github.com/redbadger/pager/blob/master/pager_demo.gif)
 
 ## Installation
 
