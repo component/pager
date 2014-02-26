@@ -1,13 +1,18 @@
-
 # pager
 
   Pager ui component.
 
-  ![](http://f.cl.ly/items/023v0g1I2p2D4313033a/Screen%20Shot%202012-09-17%20at%202.40.06%20PM.png)
+  ![Pager](https://github.com/redbadger/pager/blob/master/pager_demo.gif?raw=true)
 
-## Installation
+## How to use
 
-    $ component install component/pager
+This is a component component. You can easily plug it into your site or web app. Check the example of usage in test/index.html. To get things working, follow these easy steps (assuming you already have Node.js and npm installed):
+
+* `npm install -g component`
+* Clone this repository and navigate into the component folder
+* Run `component install` to fetch dependencies
+* Run `component build`
+* Now you can open test/index.html and if everything is fine you should be able to see the component in action
 
 ## Events
 
@@ -21,7 +26,11 @@
 
 ### Pager#perpage(n)
 
-  Set the number of items per page to `n`. [5]
+  Set the number of items per page to `n`. [5]. Pager will calculate number of page links by dividing total amount of items on perpage value.
+  
+### Pager#max_pages(n)
+
+  Specify size of the links window. `n` means amount of page links to the left and right from the current page. `...` will be added to the start and end of the links window.
 
 ### Pager#pages()
 

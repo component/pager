@@ -1,1 +1,1 @@
-module.exports = '<ul class="pager">\n  <li class="prev"><a href="#">prev</a></li>\n  <li class="next"><a href="#">next</a></li>\n</ul>';
+module.exports = '<ul class="pager">\n  <li class="first"><a href="#">&laquo;</a></li><li class="prev"><a href="#">&lsaquo;</a></li>\n  <li class="next"><a href="#">&rsaquo;</a></li><li class="last"><a href="#">&raquo;</a></li>\n</ul>';
