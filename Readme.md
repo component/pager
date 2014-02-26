@@ -4,9 +4,15 @@
 
   ![Pager](https://github.com/redbadger/pager/blob/master/pager_demo.gif?raw=true)
 
-## Installation
+## How to use
 
-    $ component install component/pager
+This is a component component. You can easily plug it into your site or web app. Check the example of usage in test/index.html. To get things working, follow these easy steps (assuming you already have Node.js and npm installed):
+
+* `npm install -g component`
+* Clone this repository and navigate into the component folder
+* Run `component install` to fetch dependencies
+* Run `component build`
+* Now you can open test/index.html and if everything is fine you should be able to see the component in action
 
 ## Events
 
